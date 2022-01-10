@@ -1,0 +1,15 @@
+{
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "lib": ["dom", "es6", "dom.iterable", "scripthost", "es2016.array.include"],
+    "sourceMap": true,
+    "outDir": "./build",
+    "removeComments": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
