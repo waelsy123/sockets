@@ -18,6 +18,9 @@ let clients: any = []
 
 wss.on('connection', (ws: any) => {
     console.log('Client connected');
+    const clientId = new Date().getTime().toString()
+    const hash = clientId
+
     clients.push(ws)
     const clientReference = clients.length
 
@@ -32,7 +35,6 @@ wss.on('connection', (ws: any) => {
             const str = data.toString()
             const json = JSON.parse(str)
 
-            const hash = crypto.createHash('md5').update(str).digest('hex');
 
             store[hash] = { ...json, hash, time: new Date().getTime() }
 
@@ -43,11 +45,14 @@ wss.on('connection', (ws: any) => {
 
     });
 
-
     // send client all games every 2 seconds
-    const intr = setInterval(() => {
+    const sendAllGames = () => {
         const items = Object.values(store)
         items.map((item) => { ws.send(JSON.stringify(item)) })
+    }
+    sendAllGames()
+    const intr = setInterval(() => {
+        sendAllGames()
     }, 10000)
 
     ws.on('close', () => {
