@@ -22,7 +22,7 @@ wss.on('connection', (ws: any) => {
     const clientReference = clients.length
 
     // we send {
-    //     id,
+    //     hash,
     //     ...data
     // }
     ws.on('message', function message(data: any) {
@@ -48,7 +48,7 @@ wss.on('connection', (ws: any) => {
     const intr = setInterval(() => {
         const items = Object.values(store)
         items.map((item) => { ws.send(JSON.stringify(item)) })
-    }, 5000)
+    }, 10000)
 
     ws.on('close', () => {
         delete clients[clientReference - 1];
