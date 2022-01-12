@@ -53,7 +53,7 @@ wss.on('connection', (ws: any) => {
     sendAllGames()
     const intr = setInterval(() => {
         sendAllGames()
-    }, 1000)
+    }, 600)
 
     ws.on('close', () => {
         delete clients[clientReference - 1];
